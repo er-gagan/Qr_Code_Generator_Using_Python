@@ -1,12 +1,27 @@
 from tkinter import *
+from qrcode import *
+
 root = Tk()
 root.geometry("390x350")
 root.title("Qr Code Generator")
 
 data = StringVar()
 
+def ShowImg():
+    QrCodeWindow = Toplevel()
+    QrCodeWindow.geometry('300x300')
+    Ph = PhotoImage(file="./ico.png")
+    QrCodeWindow.iconphoto(False,Ph)
+    QrCodeWindow.resizable(0,0)
+    filename = PhotoImage(file="./QRCODE.png")
+    Label(QrCodeWindow,image=filename).place(x=1,y=1)
+    QrCodeWindow.mainloop()
+    
 def Click():
-    print(data.get())
+    info = data.get()
+    img = make(info)
+    img.save("./QRCODE.png")
+    ShowImg()
     
 def Clear():
     data.set("")
